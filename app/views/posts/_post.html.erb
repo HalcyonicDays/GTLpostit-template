@@ -1,0 +1,21 @@
+
+<div class='row'>
+  <div class= 'span8 well'>
+    
+    <%= render post.categories %>
+    <h4><%= link_to post.title, post_path(post) %></h4>
+    <p> <%= post.description %></p>
+    <h5><%= link_to 'Edit Post', edit_post_path(post) %></h5>
+    <p>
+      <span class='quiet'>posted by</span> <%= post.user.username %>
+      <small>at <%= post.created_at %></small>
+    </p>
+    
+    <small>
+      <span>
+        <%= link_to(pluralize(post.comments.length, "comment"), post_path(post)) %>
+      </span>
+    </small>
+
+  </div>
+</div>

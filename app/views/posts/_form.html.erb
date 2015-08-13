@@ -1,0 +1,20 @@
+
+<%= render '/shared/errors', object: @post %>
+
+<h4>Rails model-backed form helpers</h4>
+<%= form_for @post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br/>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <br/>
+  <%= f.label :descrption %>
+  <%= f.text_area :description, rows: 3 %>
+  <br/>
+  <% Category.all.each do |category| %>
+    <%= check_box_tag name='post[category_ids][]', value=category.id %> <%= category.name %>
+  <% end %>
+  <br/>
+  <%= f.submit(@post.new_record? ? "Create Post" : "Update Post", class:"btn btn-primary") %>
+<% end %>

@@ -1,0 +1,21 @@
+<p>
+  <%= render @post.categories %>
+</p>
+
+<%= render 'shared/content_title', title: @post.title %>
+
+<h3>Post:</h3>
+<p><%= @post.description %></p>
+<p><%= link_to @post.url, fix_url(@post.url) %></p>
+<hr/>
+<div class='well'>
+  <% @post.comments.each do |comment| %>
+    <ul>
+      <li><%= comment.body %></li>
+    </ul>
+  <% end %>
+</div>
+
+<%= render 'comments/form' %>
+
+<%= link_to 'return to posts index', posts_path %>
