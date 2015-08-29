@@ -11,11 +11,12 @@
 <div class='well'>
   <% @post.comments.each do |comment| %>
     <ul>
-      <li><%= comment.body %></li>
+      <p><li><%= comment.body %></li>
+      by <%= link_to comment.user.username, user_path(comment.user) %></p>
     </ul>
   <% end %>
 </div>
 
-<%= render 'comments/form' %>
+<%= render 'comments/form' if logged_in? %>
 
 <%= link_to 'return to posts index', posts_path %>

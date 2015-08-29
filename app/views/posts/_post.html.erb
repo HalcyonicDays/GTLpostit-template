@@ -7,8 +7,8 @@
     <p> <%= post.description %></p>
     <h5><%= link_to 'Edit Post', edit_post_path(post) %></h5>
     <p>
-      <span class='quiet'>posted by</span> <%= post.user.username %>
-      <small>at <%= post.created_at %></small>
+      <span class='quiet'>posted by</span> <%= link_to post.user.username, user_path(post.user) %>
+      <small>at <%= local_time(post.created_at) %></small>
     </p>
     
     <small>
