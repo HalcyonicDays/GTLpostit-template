@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
   before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update]
 
   def index
     @posts = Post.all
@@ -22,10 +23,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if @post.user != current_user
-      flash[:error] = "You cannot edit posts which are not yours."
-      redirect_to root_path
-    end
   end
 
   def update
@@ -40,4 +37,11 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
+
+  def require_same_user
+    if @post.user != current_user
+      flash[:notice] = "That is not yours."
+      redirect_to root_path
+    end
+end
 end

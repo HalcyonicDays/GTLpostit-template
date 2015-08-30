@@ -1,6 +1,13 @@
+<% show_post ||= false %>
+
 <div class='row'>
   <div class= 'span8 well'>
-    <h4><%= link_to comment.post.title, post_path(comment.post) %></h4>
-    <p><%= comment.body %></p>
+    <em><%= comment.body %> </em>
+    <% if show_post == true %> 
+      on <strong><%= link_to comment.post.title, post_path(comment.post) %></strong>
+    <% end %>
+    <br/>
+    <span class='quiet'>by </span><%= link_to comment.user.username, user_path(comment.user) %>
+    <small>at <%= local_time(comment.created_at) %></small>
   </div>
 </div>

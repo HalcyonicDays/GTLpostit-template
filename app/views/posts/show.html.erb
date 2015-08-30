@@ -8,14 +8,10 @@
 <p><%= @post.description %></p>
 <p><%= link_to @post.url, fix_url(@post.url) %></p>
 <hr/>
-<div class='well'>
-  <% @post.comments.each do |comment| %>
-    <ul>
-      <p><li><%= comment.body %></li>
-      by <%= link_to comment.user.username, user_path(comment.user) %></p>
-    </ul>
-  <% end %>
-</div>
+
+<% @post.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
 
 <%= render 'comments/form' if logged_in? %>
 

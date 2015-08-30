@@ -1,3 +1,5 @@
+<% password_needed ||= false %>
+
 <%= render '/shared/errors', object: @user %>
 
 <div class='well'>
@@ -5,12 +7,14 @@
     <%= f.label :username %>
     <%= f.text_field :username %>
     <br/>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <br/>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-    <br/>
+    <% if password_needed == true %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <br/>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+      <br/>
+    <% end %>
     <%= f.submit(@user.new_record? ? "Register User" : "Update Profile", class:"btn btn-primary")  %>
   <% end %>
 </div>
