@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
   before_action :require_same_user, only: [:edit, :update]
 
@@ -28,6 +28,12 @@ class PostsController < ApplicationController
   def update
     @post.update(post_params) ? (redirect_to posts_path) : (render :edit)
   end
+
+  def vote
+    @vote = Vote.create(user: current_user, voteable: @post, vote: params[:vote])
+    flash[:notice] = @vote.valid? ? "You vote was counted." : "You vote was not counted."
+    redirect_to :back
+  end 
 
   private
     def post_params

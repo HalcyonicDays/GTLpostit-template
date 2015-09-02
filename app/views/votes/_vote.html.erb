@@ -1,0 +1,13 @@
+
+<div class= 'span0 well text-center'>
+  
+  <%= link_to controller: "#{object.class.to_s.downcase.pluralize}", action: "votes", id: object.id, data: {method: :post} , vote: true do %>
+    <i class='icon-arrow-up'></i>
+  <% end %>
+  <br/>
+  <%= pluralize(object.total_votes, "vote") %>
+  <br/>
+  <%= link_to votes_post_path(object, vote: false), method: :post do %>
+    <i class='icon-arrow-down'></i>
+  <% end %>
+</div>
