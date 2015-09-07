@@ -1,0 +1,5 @@
+<% if @vote.valid? %>
+  $('#comment_<%= @comment.id %>_vote').html('<%= pluralize(@comment.total_votes, "votes") %>');
+<% else %>
+  alert('You may only vote once per post.')
+<% end %>

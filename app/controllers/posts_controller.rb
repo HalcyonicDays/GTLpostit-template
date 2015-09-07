@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
-  before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show, :vote]
   before_action :require_same_user, only: [:edit, :update]
 
   def index
@@ -31,8 +31,13 @@ class PostsController < ApplicationController
 
   def vote
     @vote = Vote.create(user: current_user, voteable: @post, vote: params[:vote])
-    flash[:notice] = @vote.valid? ? "You vote was counted." : "You vote was not counted."
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        flash[:notice] = @vote.valid? ? "You vote was counted." : "You vote was not counted."
+        redirect_to :back
+      end
+      format.js
+    end
   end 
 
   private
