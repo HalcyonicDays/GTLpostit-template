@@ -46,13 +46,10 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by_slug(params[:id])
     end
 
-  def require_same_user
-    if @post.user != current_user
-      flash[:notice] = "That is not yours."
-      redirect_to root_path
+    def require_same_user
+      access_denied unless logged_in? and (@post.user != current_user || current_user.role == "admin")
     end
-end
 end

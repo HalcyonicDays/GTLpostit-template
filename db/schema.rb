@@ -11,18 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902003805) do
+ActiveRecord::Schema.define(version: 20150916010529) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   create_table "comments", force: true do |t|
     t.text     "body"
     t.integer  "user_id"
     t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions", force: true do |t|
+    t.string   "permissions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,7 +44,14 @@ ActiveRecord::Schema.define(version: 20150902003805) do
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+  end
+
+  create_table "user_permissions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "permission_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,6 +61,9 @@ ActiveRecord::Schema.define(version: 20150902003805) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.string   "slug"
+    t.string   "role"
+    t.string   "time_zone",       default: "Eastern Time (US & Canada)"
   end
 
   create_table "votes", force: true do |t|

@@ -7,6 +7,10 @@
     <%= f.label :username %>
     <%= f.text_field :username %>
     <br/>
+    <p class='nav_item'>
+      <%= f.label :time_zone %>
+      <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones) %>
+    </p>
     <% if password_needed == true %>
       <%= f.label :password %>
       <%= f.password_field :password %>

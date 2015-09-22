@@ -4,6 +4,7 @@ module ApplicationHelper
   end
 
   def local_time(datetime)
-    datetime.in_time_zone('Eastern Time (US & Canada)').strftime("%d %b %Y %H:%M")
+    dt = logged_in? ? datetime.in_time_zone(current_user.time_zone) : datetime
+    dt.strftime("%d %b %Y %H:%M %Z")
   end
 end
